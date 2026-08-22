@@ -1,0 +1,139 @@
+$bg-page:      #0d1117;
+$bg-card:      #161b22;
+$border-color: #2a3348;
+$text-primary: #e6edf3;
+$accent:       #ff2d78;
+$font-stack:   system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+.loading-screen {
+    width: 100%;
+    min-height: 100vh;
+    background-color: $bg-page;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+
+    &__card {
+        width: 100%;
+        max-width: 440px;
+        background-color: $bg-card;
+        border: 1px solid $border-color;
+        border-radius: 1rem;
+        padding: 2rem 1.75rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    &__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: $accent;
+        background: rgba($accent, 0.12);
+        border: 1px solid rgba($accent, 0.3);
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        margin-bottom: 1.1rem;
+    }
+
+    &__pulse {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: $accent;
+        box-shadow: 0 0 8px 2px rgba($accent, 0.6);
+        animation: loading-pulse 1.3s ease-in-out infinite;
+    }
+
+    &__title {
+        font-family: $font-stack;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: $text-primary;
+        margin: 0 0 1.5rem;
+    }
+
+    &__cursor {
+        color: $accent;
+        animation: loading-blink 1s step-start infinite;
+    }
+
+    &__log {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        font-family: 'Courier New', monospace;
+        font-size: 0.82rem;
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: #454b57;
+        transition: color 0.3s ease;
+
+        &.is-active {
+            color: $text-primary;
+        }
+
+        &.is-done {
+            color: $accent;
+        }
+    }
+
+    &__marker {
+        width: 14px;
+        text-align: center;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+
+    &__text {
+        flex: 1;
+    }
+
+    &__spinner {
+        width: 10px;
+        height: 10px;
+        margin-left: auto;
+        border: 2px solid rgba($accent, 0.25);
+        border-top-color: $accent;
+        border-radius: 50%;
+        animation: loading-spin 0.7s linear infinite;
+        flex-shrink: 0;
+    }
+
+    &__track {
+        margin-top: 1.6rem;
+        height: 3px;
+        width: 100%;
+        background-color: $border-color;
+        border-radius: 999px;
+        overflow: hidden;
+    }
+
+    &__fill {
+        height: 100%;
+        background: linear-gradient(90deg, $accent, lighten($accent, 12%));
+        border-radius: 999px;
+        transition: width 0.8s ease;
+    }
+}
+
+@keyframes loading-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.75); }
+}
+
+@keyframes loading-blink {
+    50% { opacity: 0; }
+}
+
+@keyframes loading-spin {
+    to { transform: rotate(360deg); }
+}
